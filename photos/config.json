@@ -1,9 +1,9 @@
 {
     "development": {
         "database_host": "mysqldb",
-        "database_user": "indeedadmin",
-        "database_password": "indeedadminpass",
-        "database_name": "photos",
+        "database_user": "root",
+        "database_password": "Greedisgood1!",
+        "database_name": "Photos",
         "auth_url": "http://auth:3000",
         "s3_access_key": "AKIAVEYWO6SSQC5AZUOE",
         "s3_secret_key": "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",
