@@ -1,16 +1,16 @@
 {
     "development": {
         "database_host": "mysqldb",
-        "database_user": "root",
-        "database_password": "Greedisgood1!",
-        "database_name": "Auth",
-        "admin_email": "dziyura@gmail.com",
-        "admin_password": "Greedisgood1!"
+        "database_user": "indeedadmin",
+        "database_password": "indeedadminpass",
+        "database_name": "auth",
+        "admin_email": "admin@mail.com",
+        "admin_password": "Admin@123"
     },
     "test": {
         "database_host": "localhost",
-        "database_user": "root",
-        "database_password": "Greedisgood1!",
-        "database_name": "Auth"
+        "database_user": "indeedadmin",
+        "database_password": "indeedadminpass",
+        "database_name": "auth_test"
     }
 }

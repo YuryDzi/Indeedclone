@@ -1,9 +1,9 @@
 {
   "development": {
     "database_host": "mysqldb",
-    "database_user": "root",
-    "database_password": "Greedisgood1!",
-    "database_name": "Chat",
+    "database_user": "indeedadmin",
+    "database_password": "indeedadminpass",
+    "database_name": "chat",
     "auth_url": "http://auth:3000",
     "company_url": "http://company:3000",
     "user_url": "http://user:3000"
