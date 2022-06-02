@@ -1,62 +1,18 @@
-const { DataTypes } = require('sequelize');
+const mongoose = require('mongoose');
 
-const Tracking = global.DB.define('tracking', {
-  _id: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-    unique: true,
-  },
-  employerId: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  userId: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  subject: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+const TrackingSchema = new mongoose.Schema({
+  jobId: mongoose.Types.ObjectId,
+  userId: mongoose.Types.ObjectId,
+  resume: String,
+  coverLetter: String,
+  answers: mongoose.Schema.Types.Mixed,
+  date: Date,
+  status: {
+    type: String,
+    enum: ['RECEIVED', 'UNDER_REVIEW', 'ACCEPTED', 'REJECTED'],
   },
 });
 
-const Status = global.DB.define('status', {
-  _id: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-    unique: true,
-  },
-  stage: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  to: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  from: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+const Tracking = mongoose.model('tracking', TrackingSchema);
 
-Tracking.hasMany(Status, {
-  foreignKey: 'trackingId',
-  sourceKey: '_id',
-});
-
-Status.belongsTo(Tracking, {
-  foreignKey: 'trackingId',
-  targetKey: '_id',
-});
-
-const runMigration = async (force) => {
-  if (!global.DB) {
-    return Promise.reject(new Error('please initialize DB'));
-  }
-  await Tracking.sync({ force });
-  await Status.sync({ force });
-  return Promise.resolve(global.DB);
-};
-
-module.exports = { Tracking, Status, runMigration };
+module.exports = { Tracking };

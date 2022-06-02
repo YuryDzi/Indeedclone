@@ -5,6 +5,7 @@ const { validationResult } = require('express-validator');
 const { ObjectId } = require('mongodb');
 const { Chat } = require('../model');
 const { Types } = require('mongoose');
+const { Tracking } = require('../../tracking/model');
 
 const getAllChats = async (req, res) => {
   try {
@@ -25,14 +26,14 @@ const getAllChats = async (req, res) => {
       return;
     }
 
-    const listChats = await Chat.findAndCountAll({
+    const listTracking = await Tracking.findAndCountAll({
       where: queryObj,
       order: [['createdAt', 'DESC']],
       limit,
       offset,
     });
 
-    if (!listChats) {
+    if (!listTracking) {
       res.status(404).json({
         ...errors.notFound,
         message: 'Chat does not exist for a given User',
