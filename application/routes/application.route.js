@@ -41,7 +41,7 @@ const updateValidators = () => [
  * @param {integer} page.query
  * @param {integer} limit.query
  * @param {string} userId.query
- * @param {strint} jobIds.query
+ * @param {string} jobIds.query
  * @group Application
  * @security JWT
  * @returns {Array.<Application>} 200 - List of application info
@@ -52,7 +52,7 @@ router.get('/', getApplications);
  * Create a Application
  * @route POST /applications
  * @group Application
- * @security JWT
+ * @security JWT 
  * @param {Application.model} Application.body.require
  * @returns {Application.model} 201 - Created Application
  */
