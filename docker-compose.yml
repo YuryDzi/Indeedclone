@@ -170,12 +170,25 @@ services:
       - 7006:3000
     networks:
       - indeed-net
+# tracking is still in test
+  tracking:
+    depends_on:
+      - mongodb
+      - kafka-backend
+    build:
+      context: ./tracking
+      dockerfile: Dockerfile
+    ports:
+      - 7007:3000
+    networks:
+      - indeed-net
 
   web:
     depends_on:
       - application
       - auth
       - chat
+      - tracking
       - company
       - photos
       - review
