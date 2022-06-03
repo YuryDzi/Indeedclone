@@ -1,0 +1,61 @@
+version: '3.7'
+
+services:
+  #########################################################################
+  #                               DB                                      #
+  #########################################################################
+  mongodb:
+    image: mongo:4.4.0-rc7
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: indeedadmin
+      MONGO_INITDB_ROOT_PASSWORD: indeedadminpass
+    volumes:
+      - ./nosql-data:/data/db
+      - ./db-init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - 27017:27017
+    networks:
+      - indeed-net
+
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_LISTNERS=PLAINTEXT://:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    # depends_on:
+    #   - zookeeper
+    networks:
+      - indeed-net
+
+  kafka-backend:
+    depends_on:
+      - kafka
+      # - zookeeper
+    build:
+      context: ./kafka-backend
+      dockerfile: Dockerfile
+    networks:
+      - indeed-net
+
+  tracking:
+    depends_on:
+      - mongodb
+      # - kafka-backend
+    build:
+      context: ./tracking
+      dockerfile: Dockerfile
+    ports:
+      - 7007:3000
+    networks:
+      - indeed-net
+
+networks:
+  indeed-net:

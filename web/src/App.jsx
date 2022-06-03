@@ -49,6 +49,7 @@ function App() {
           <Route path="/hire" component={withAuth(EmployersMain, 'any', false)} />
           <Route path="/users/reviews" component={withAuth(ReviewsPage, 'user', true)} />
           <Route path="/users/applications" component={withAuth(ApplicationsPage, 'user', true)} />
+          {/* <Route path="/users/tracking" component={withAuth(TrackingPage, 'user', true)} /> */}
           <Route exact path="/" component={withAuth(JobsMain, 'any', true)} />
         </Switch>
       </Router>
