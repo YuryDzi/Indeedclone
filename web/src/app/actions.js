@@ -57,3 +57,10 @@ export function message(payload) {
     payload,
   };
 }
+
+export function tracking(payload) {
+  return {
+    type: 'TRACKING',
+    payload,
+  };
+}

@@ -35,7 +35,7 @@ const getJob = async (id, auth) => {
 
   return response.data;
 };
-
+// get back to this one to find out do we need it
 const getAllUsers = async (auth) => {
   const response = await axios.get(`${global.gConfig.user_url}/users`, {
     params: { all: true },
@@ -250,6 +250,6 @@ module.exports = {
   getTracking,
   getTrackingById,
   createTracking,
-//   updateApplication,
-//   deleteApplication,
+//   updateTracking,
+//   deleteTracking,
 };
